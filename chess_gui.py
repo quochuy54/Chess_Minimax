@@ -67,25 +67,15 @@ def highlight_square(screen, game_state, valid_moves, square_selected):
 
 def main():
     human_player = ""
-    while True:
-        try:
-            number_of_players = input("How many players (1 or 2)?\n")
-            if int(number_of_players) == 1:
-                number_of_players = 1
-                while True:
-                    human_player = input("What color do you want to play (w or b)?\n")
-                    if human_player == "w" or human_player == "b":
-                        break
-                    else:
-                        print("Enter w or b.\n")
-                break
-            elif int(number_of_players) == 2:
-                number_of_players = 2
+    try:
+        while True:
+            human_player = input("Ban muon chon mau nao? (w or b)?\n")
+            if human_player == "w" or human_player == "b":
                 break
             else:
-                print("Enter 1 or 2.\n")
-        except ValueError:
-            print("Enter 1 or 2.")
+                print("Enter w or b.\n")
+    except ValueError:
+        print("Enter again")
 
     py.init()
     print("Bat dau")
@@ -143,17 +133,6 @@ def main():
                         valid_moves = game_state.get_valid_moves((row, col))
                         if valid_moves is None:
                             valid_moves = []
-            elif e.type == py.KEYDOWN:
-                if e.key == py.K_r:
-                    game_over = False
-                    game_state = chess_engine.game_state()
-                    valid_moves = []
-                    square_selected = ()
-                    player_clicks = []
-                    valid_moves = []
-                elif e.key == py.K_u:
-                    game_state.undo_move()
-                    print(len(game_state.move_log))
 
         draw_game_state(screen, game_state, valid_moves, square_selected)
 
